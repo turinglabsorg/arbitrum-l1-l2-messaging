@@ -80,9 +80,26 @@ async function main() {
     }
   )
   console.log("Waiting at:", setGreetingTx.hash)
-  await setGreetingTx.wait()
-
+  const setGreetingRec = await setGreetingTx.wait()
   console.log(`Greeting txn confirmed on L1! 🙌`)
+  const l1TxReceipt = new L1TransactionReceipt(setGreetingRec)
+  console.log("Receipt:", l1TxReceipt)
+  // Wait for receipt
+  const messages = await l1TxReceipt.getL1ToL2Messages(l2Wallet)
+  const message = messages[0]
+  console.log('Waiting for L2 side. It may take 10-15 minutes ⏰⏰')
+  const messageResult = await message.waitForStatus()
+  const status = messageResult.status
+  if (status === L1ToL2MessageStatus.REDEEMED) {
+    console.log(
+      `L2 retryable txn executed 🥳 ${messageResult.l2TxReceipt.transactionHash}`
+    )
+  } else {
+    console.log(
+      `L2 retryable txn failed with status ${L1ToL2MessageStatus[status]}`
+    )
+  }
+
   console.log("Done.")
 }
 

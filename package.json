@@ -9,7 +9,9 @@
     "l1:update_target": "npx hardhat run scripts/l1_update_target.js",
     "l2:update_target": "npx hardhat run scripts/l2_update_target.js",
     "l2:get_greeting": "npx hardhat run scripts/l2_get_greeting.js",
-    "l1:set_greeting": "npx hardhat run scripts/l1_set_greeting.js"
+    "l1:set_greeting": "npx hardhat run scripts/l1_set_greeting.js",
+    "l1:get_greeting": "npx hardhat run scripts/l1_get_greeting.js",
+    "l2:set_greeting": "npx hardhat run scripts/l2_set_greeting.js"
   },
   "author": "YOMI <dev@yomi.digital>",
   "license": "MIT",
