@@ -1,0 +1,30 @@
+{
+  "name": "arbitrum-l1-l2-messaging",
+  "version": "1.0.0",
+  "description": "Testing Arbitrum messaging",
+  "scripts": {
+    "build": "npx hardhat compile",
+    "l1:deploy": "npx hardhat run scripts/l1_deploy.js",
+    "l2:deploy": "npx hardhat run scripts/l2_deploy.js",
+    "l1:update_target": "npx hardhat run scripts/l1_update_target.js",
+    "l2:update_target": "npx hardhat run scripts/l2_update_target.js",
+    "l2:get_greeting": "npx hardhat run scripts/l2_get_greeting.js",
+    "l1:set_greeting": "npx hardhat run scripts/l1_set_greeting.js"
+  },
+  "author": "YOMI <dev@yomi.digital>",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "ethers": "^5.1.2",
+    "hardhat": "^2.2.0"
+  },
+  "dependencies": {
+    "@arbitrum/nitro-contracts": "1.0.0-beta.8",
+    "@arbitrum/sdk": "^v3.0.0",
+    "arb-bridge-eth": "^0.7.5",
+    "arb-shared-dependencies": "^1.0.0",
+    "arbos-precompiles": "^1.0.2",
+    "dotenv": "^8.2.0",
+    "minimist": "^1.2.5"
+  }
+}

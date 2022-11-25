@@ -1,0 +1,9 @@
+{
+    "l1_contract_address": "",
+    "l2_contract_address": "",
+    "l1_provider": "http://localhost:8545",
+    "l2_provider": "https://goerli-rollup.arbitrum.io/rpc",
+    "owner_mnemonic": "",
+    "owner_key": "",
+    "owner_address": ""
+}

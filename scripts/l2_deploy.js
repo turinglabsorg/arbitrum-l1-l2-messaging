@@ -1,0 +1,37 @@
+const { providers, Wallet } = require('ethers')
+const hre = require('hardhat')
+const ethers = require('ethers')
+const fs = require('fs');
+const {
+  EthBridger,
+  getL2Network,
+} = require('@arbitrum/sdk')
+
+async function main() {
+  const config_file = "./configs/goerli.json"
+  const configs = JSON.parse(fs.readFileSync(config_file).toString())
+  // Init L2 provider
+  const l2Provider = new providers.JsonRpcProvider(configs.l2_provider)
+  const l2Wallet = new Wallet(configs.owner_key, l2Provider)
+  // Deploy as usual
+  console.log('Deploying contract on L2..')
+  const Contract = await (
+    await hre.ethers.getContractFactory('GreeterL2')
+  ).connect(l2Wallet)
+  const contract = await Contract.deploy(
+    'Hello world in L1',
+    ethers.constants.AddressZero
+  );
+  console.log('Deploy transaction is: ' + contract.deployTransaction.hash)
+  await contract.deployed();
+  console.log("Contract deployed to:", contract.address);
+  configs.l2_contract_address = contract.address
+  fs.writeFileSync(config_file, JSON.stringify(configs, null, 4))
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
